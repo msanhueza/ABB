@@ -17,13 +17,17 @@ public class Abb {
      */
     public static void main(String[] args) {
         Nodo raiz = null;
-        int[] valores = {5,4,6,8,9,1,2,3,7,10};
-        for(int i=0; i<valores.length; i++){
-            raiz = insertarNodoRecursivo(raiz, valores[i]);
-        }
-        System.out.println("encontrar " +  buscarNodoRecursivo(raiz, 3));
-        eliminarNodo(2, raiz);
-        imprimirPreOrden(raiz);
+        ArrayList<Integer> numeros = generarNumeros(5);
+        System.out.println(numeros);
+        
+//      GENERACION NORMAL        
+//      raiz = abbNormal(raiz, numeros);
+//      imprimirPreOrden(raiz);
+        
+//      GENERACION ALEATORIA        
+//      raiz = abbAleatorio(raiz, numeros);
+//      imprimirPreOrden(raiz);
+        
     }
     
 /**
@@ -182,6 +186,64 @@ public class Abb {
               imprimirPreOrden(nodo.getDer());
           }
       }
+    
+    /**
+     * El metodo se encarga de generar n numeros aleatorios sin repeticion
+     * @param cant se refiere a la cantidad de numeros aleatorios que se desean generar desde el 1 al cant
+     * @return 
+     */
+    public static ArrayList<Integer> generarNumeros(int cant){
+        ArrayList<Integer> numeros = new ArrayList<Integer>();
+        int n = cant;
+        int N = 0;
+        int M = cant+1; 
+        int valor;
+        for(int i=0; i<n; i++){
+            do{
+                valor = (int) Math.floor(Math.random()*(N-M+1)+M);
+            }while(numeros.contains(valor));
+            numeros.add(valor);
+        }
+        return numeros;
+    
+    }
+    
+    
+    /**
+     * El metodo se encarga de insertar los valores del arraylist de manera normal
+     * @param raiz es la raiz del abb
+     * @param numeros es el arrayList con los valores a insertar
+     * @return la raiz del abb
+     */    
+    public static Nodo abbNormal(Nodo raiz, ArrayList<Integer> numeros){
+        Nodo aux = raiz;
+        for(int i=0; i<numeros.size(); i++){
+            aux = insertarNodoRecursivo(aux, numeros.get(i));
+        }
+        return aux;
+    }     
+
+    
+    /**
+     * El metodo se encarga de insertar los valores del arraylist de manera aleatoria
+     * @param raiz es la raiz del abb
+     * @param numeros es el arrayList con los valores a insertar
+     * @return la raiz del abb
+     */
+    public static Nodo abbAleatorio(Nodo raiz, ArrayList<Integer> numeros){
+        Nodo aux = raiz;
+        int n = numeros.size();
+        int N = 0;
+        int M;         
+        int valor;
+        for(int i=0; i<n; i++){
+            M = numeros.size()-1;
+            valor = (int) Math.floor(Math.random()*(N-M+1)+M); // indice del arrayList a eliminar 
+            aux = insertarNodoRecursivo(aux, numeros.get(valor)); // agrego el valor elegido al azar
+            numeros.remove(valor); // elimino el valor elegido al azar para no volver a elegirlo
+        }
+        return aux;
+    }
     
 
 }
