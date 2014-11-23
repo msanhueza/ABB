@@ -34,7 +34,7 @@ public class Abb {
      * El metodo realiza la busqueda recursiva de un valor determinado
      * @param nodo se refiere al nodo actual
      * @param valor se refiere al valor a buscar
-     * @return 
+     * @return la raiz del abb
      */
     public static Nodo buscarNodoRecursivo(Nodo nodo, int valor){
         if(nodo == null){ // si es null el nodo
@@ -55,7 +55,7 @@ public class Abb {
      * El metodo realiza la busqueda iterativa de un valor determinado
      * @param nodo se refiere al nodo actual
      * @param valor se refiere al valor a buscar
-     * @return 
+     * @return la raiz del abb
      */
     public static Nodo buscarNodoIterativo(Nodo nodo, int valor){
         
@@ -74,7 +74,7 @@ public class Abb {
      * El metodo inserta de manera recursiva un valor en el ABB de forma recursiva
      * @param nodo se refiere al nodo actual
      * @param valor se refiere al valor que se desea insertar
-     * @return la raiz del nodo
+     * @return la raiz del abb
      */
     public static Nodo insertarNodoRecursivo(Nodo nodo, int valor){
       if(nodo == null){
@@ -97,7 +97,7 @@ public class Abb {
      * El metodo inserta de manera iterativa un valor en el ABB de forma recursiva
      * @param nodo se refiere al nodo actual
      * @param valor se refiere al valor que se desea insertar
-     * @return la raiz del nodo
+     * @return la raiz del abb
      */
      public static Nodo insertarNodoIterativo (Nodo nodo, int valor){
           Nodo nuevo;
@@ -137,7 +137,7 @@ public class Abb {
      * El metodo elimina un nodo del ABB
      * @param valor se refiere al valor del nodo a eliminar
      * @param nodo se refiere al nodo a eliminar
-     * @return la raiz del nodo
+     * @return la raiz del abb
      */
     public static Nodo eliminarNodo(int valor, Nodo nodo) {
       if (nodo == null){
@@ -190,7 +190,7 @@ public class Abb {
     /**
      * El metodo se encarga de generar n numeros aleatorios sin repeticion
      * @param cant se refiere a la cantidad de numeros aleatorios que se desean generar desde el 1 al cant
-     * @return 
+     * @return un arrayList con los n numeros generados al azar sin repeticion
      */
     public static ArrayList<Integer> generarNumeros(int cant){
         ArrayList<Integer> numeros = new ArrayList<Integer>();
