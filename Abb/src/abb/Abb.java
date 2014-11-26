@@ -5,6 +5,7 @@
 package abb;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -16,17 +17,40 @@ public class Abb {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Nodo raiz = null;
-        ArrayList<Integer> numeros = generarNumeros(5);
-        System.out.println(numeros);
         
-//      GENERACION NORMAL        
-//      raiz = abbNormal(raiz, numeros);
-//      imprimirPreOrden(raiz);
+        Random random = new Random();
+        if(args.length == 1)
+        {
+            random = new Random(Long.parseLong(args[0]));
+        }
         
-//      GENERACION ALEATORIA        
-//      raiz = abbAleatorio(raiz, numeros);
-//      imprimirPreOrden(raiz);
+        Nodo raiz1 = null;
+        Nodo raiz2 = null;
+        ArrayList<Integer> numeros = generarNumeros(5,random);
+        System.out.println("Arreglo a insertar: " + numeros);
+        
+//      GENERACION NORMAL
+        System.out.println("");
+        System.out.println("Normal");
+        long normalCrearInicio = System.nanoTime();
+        raiz1 = abbNormal(raiz1, numeros);
+        long normalCrearFinal = System.nanoTime();
+        imprimirPreOrden(raiz1);
+        
+        System.out.println("");
+        System.out.println("Tiempo:" + (normalCrearFinal - normalCrearInicio) + " nanosegundos");
+      
+        
+//      GENERACION ALEATORIA   
+        System.out.println("");
+        System.out.println("Aleatorio");
+        long aleatorioCrearInicio = System.nanoTime();
+        raiz2 = abbAleatorio(raiz2, numeros,random);
+        long aleatorioCrearFinal = System.nanoTime();
+        imprimirPreOrden(raiz2);
+        
+        System.out.println("");
+        System.out.println("Tiempo:" + (aleatorioCrearFinal - aleatorioCrearInicio) + " nanosegundos");
         
     }
     
@@ -192,7 +216,7 @@ public class Abb {
      * @param cant se refiere a la cantidad de numeros aleatorios que se desean generar desde el 1 al cant
      * @return un arrayList con los n numeros generados al azar sin repeticion
      */
-    public static ArrayList<Integer> generarNumeros(int cant){
+    public static ArrayList<Integer> generarNumeros(int cant, Random random){
         ArrayList<Integer> numeros = new ArrayList<Integer>();
         int n = cant;
         int N = 0;
@@ -200,7 +224,7 @@ public class Abb {
         int valor;
         for(int i=0; i<n; i++){
             do{
-                valor = (int) Math.floor(Math.random()*(N-M+1)+M);
+                valor = (int) Math.floor(random.nextFloat()*(N-M+1)+M);
             }while(numeros.contains(valor));
             numeros.add(valor);
         }
@@ -230,7 +254,7 @@ public class Abb {
      * @param numeros es el arrayList con los valores a insertar
      * @return la raiz del abb
      */
-    public static Nodo abbAleatorio(Nodo raiz, ArrayList<Integer> numeros){
+    public static Nodo abbAleatorio(Nodo raiz, ArrayList<Integer> numeros, Random random){
         Nodo aux = raiz;
         int n = numeros.size();
         int N = 0;
@@ -238,7 +262,7 @@ public class Abb {
         int valor;
         for(int i=0; i<n; i++){
             M = numeros.size()-1;
-            valor = (int) Math.floor(Math.random()*(N-M+1)+M); // indice del arrayList a eliminar 
+            valor = (int) Math.floor(random.nextFloat()*(N-M+1)+M); // indice del arrayList a eliminar 
             aux = insertarNodoRecursivo(aux, numeros.get(valor)); // agrego el valor elegido al azar
             numeros.remove(valor); // elimino el valor elegido al azar para no volver a elegirlo
         }
