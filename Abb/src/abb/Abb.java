@@ -13,6 +13,7 @@ import java.util.Random;
  */
 public class Abb {
 
+    int altura;
     /**
      * @param args the command line arguments
      */
@@ -422,6 +423,22 @@ public class Abb {
         }
         return;
     }
+    
+   public int retornarAltura(Nodo nodo) {
+        altura = 0;
+        retornarAltura(nodo, 1);
+        return altura;
+    }
+
+    private void retornarAltura(Nodo reco, int nivel) {
+        if (reco != null) {
+            retornarAltura(reco.getIzq(), nivel + 1);
+            if (nivel > altura) {
+                altura = nivel;
+            }
+            retornarAltura(reco.getDer(), nivel + 1);
+        }
+    }  
     
 
 }
