@@ -127,7 +127,12 @@ public class Abb {
         System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
 
         Nodo raiz3 = null;
-        raiz3 = insert(random, 10000, raiz3);
+        raiz3 = insert(random, 5, raiz3);
+        raiz3 = insert(random, 7, raiz3);
+        raiz3 = insert(random, 9, raiz3);
+        raiz3 = insert(random, 10, raiz3);
+        raiz3 = insert(random, 15, raiz3);
+        imprimirPreOrden(raiz3);
         
     }
     
@@ -348,16 +353,19 @@ public class Abb {
     
     public static Nodo insert(Random random, int valor, Nodo T){
         int n, r;
-        n = 10000;
-        r = random.nextInt(1000);
+        n = 5;
+        r = random.nextInt(5);
+        if(T == null){
+            return new Nodo(valor, null, null);
+        }
         if(r == n){
             return insertAtRoot(valor, T);
         }
         if(valor < T.getValor()){
-            T.getIzq().setIzq(insert(random, valor,T.getIzq()));
+            T.setIzq(insert(random, valor,T.getIzq()));
         }
         else{
-            T.getDer().setIzq(insert(random, valor,T.getDer()));
+            T.setDer(insert(random, valor,T.getDer()));
         }
         return T;
         
@@ -375,10 +383,13 @@ public class Abb {
         T.setDer(G);
         return T;
     }
+    
+    
 
     public static void slipt(int valor, Nodo T, Nodo S, Nodo G) {
         if(T == null){
-            S = G;
+            S = null;
+            G = null;
             return;
         }
         if(valor < T.getValor()){
