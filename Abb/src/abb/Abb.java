@@ -126,12 +126,16 @@ public class Abb {
 
         System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
 
+        Random a = new Random(1234567891);
         Nodo raiz3 = null;
-        raiz3 = insert(random, 5, raiz3);
-        raiz3 = insert(random, 7, raiz3);
-        raiz3 = insert(random, 9, raiz3);
-        raiz3 = insert(random, 10, raiz3);
-        raiz3 = insert(random, 15, raiz3);
+        raiz3 = insert(a, 15, raiz3);
+        raiz3 = insert(a, 5, raiz3);
+        raiz3 = insert(a, 7, raiz3);
+        raiz3 = insert(a, 9, raiz3);
+        raiz3 = insert(a, 10, raiz3);
+        raiz3 = insert(a, 0, raiz3);
+        raiz3 = insert(a, 8, raiz3);
+        raiz3 = insert(a, 11, raiz3);
         imprimirPreOrden(raiz3);
         
     }
