@@ -377,7 +377,7 @@ public class Abb {
         Nodo S = null;
         Nodo G = null;
         
-        slipt(valor, T, S, G);
+        split(valor, T, S, G);
         T.setValor(valor);
         T.setIzq(S);
         T.setDer(G);
@@ -386,7 +386,7 @@ public class Abb {
     
     
 
-    public static void slipt(int valor, Nodo T, Nodo S, Nodo G) {
+    public static void split(int valor, Nodo T, Nodo S, Nodo G) {
         if(T == null){
             S = null;
             G = null;
@@ -394,11 +394,11 @@ public class Abb {
         }
         if(valor < T.getValor()){
             G = T;
-            slipt(valor, T.getIzq(), S, G.getIzq());
+            split(valor, T.getIzq(), S, G.getIzq());
         }
         else{
             S = T;
-            slipt(valor, T.getDer(), S, G.getDer());
+            split(valor, T.getDer(), S, G.getDer());
         }
         return;
     }
