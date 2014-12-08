@@ -20,9 +20,9 @@ public class Abb {
         
         
         Random random = new Random();
-        int n = 5;
-        int inserciones = 5;
-        int busquedas = 5;
+        int n = 10000;
+        int inserciones = 1000;
+        int busquedas = 1000;
         
         if(args.length >= 1)
         {
@@ -57,7 +57,7 @@ public class Abb {
         imprimirPreOrden(raiz1);
         
         System.out.println("");
-        System.out.println("Tiempo para crear: " + (normalCrearFinal - normalCrearInicio) + " nanosegundos");
+        System.out.println("Tiempo para crear: " + (normalCrearFinal - normalCrearInicio)/1000 + " nanosegundos");
       
         
 //      GENERACION ALEATORIA   
@@ -69,7 +69,7 @@ public class Abb {
         imprimirPreOrden(raiz2);
         
         System.out.println("");
-        System.out.println("Tiempo para crear: " + (aleatorioCrearFinal - aleatorioCrearInicio) + " nanosegundos");
+        System.out.println("Tiempo para crear: " + (aleatorioCrearFinal - aleatorioCrearInicio)/1000 + " nanosegundos");
         
         
     }
@@ -263,7 +263,7 @@ public class Abb {
     public static Nodo abbNormal(Nodo raiz, ArrayList<Integer> numeros){
         Nodo aux = raiz;
         for (Integer numero : numeros) {
-            aux = insertarNodoRecursivo(aux, numero);
+            aux = insertarNodoIterativo(aux, numero);
         }
         return aux;
     }     
@@ -285,7 +285,7 @@ public class Abb {
         for(int i=0; i<n; i++){
             M = numeros.size()-1;
             valor = (int) Math.floor(random.nextFloat()*(N-M+1)+M); // indice del arrayList a eliminar 
-            aux = insertarNodoRecursivo(aux, numeros.get(valor)); // agrego el valor elegido al azar
+            aux = insertarNodoIterativo(aux, numeros.get(valor)); // agrego el valor elegido al azar
             numeros.remove(valor); // elimino el valor elegido al azar para no volver a elegirlo
         }
         return aux;
