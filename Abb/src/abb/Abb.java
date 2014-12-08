@@ -42,7 +42,6 @@ public class Abb {
             busquedas = Integer.parseInt(args[3]);
         }
         
-        
         Nodo raiz1 = null;
         Nodo raiz2 = null;
         
@@ -58,8 +57,10 @@ public class Abb {
         long normalTiempoFinal = System.nanoTime();
         //imprimirPreOrden(raiz1);
         
+
         //System.out.println("");
         System.out.println("Tiempo para crear: " + (normalTiempoFinal - normalTiempoInicio)/1000 + " nanosegundos");
+
       
         
 //      GENERACION ALEATORIA   
@@ -122,6 +123,7 @@ public class Abb {
         for(Integer i : buscar)
             buscarNodoRecursivo(raiz2, i);
         aleatorioTiempoFinal = System.nanoTime();
+
         
         System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
         
@@ -314,7 +316,7 @@ public class Abb {
     public static Nodo abbNormal(Nodo raiz, ArrayList<Integer> numeros){
         Nodo aux = raiz;
         for (Integer numero : numeros) {
-            aux = insertarNodoRecursivo(aux, numero);
+            aux = insertarNodoIterativo(aux, numero);
         }
         return aux;
     }     
@@ -336,7 +338,7 @@ public class Abb {
         for(int i=0; i<n; i++){
             M = numeros.size()-1;
             valor = (int) Math.floor(random.nextFloat()*(N-M+1)+M); // indice del arrayList a eliminar 
-            aux = insertarNodoRecursivo(aux, numeros.get(valor)); // agrego el valor elegido al azar
+            aux = insertarNodoIterativo(aux, numeros.get(valor)); // agrego el valor elegido al azar
             numeros.remove(valor); // elimino el valor elegido al azar para no volver a elegirlo
         }
         return aux;
