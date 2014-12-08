@@ -91,8 +91,12 @@ public class Abb {
         System.out.println("");
         System.out.println("Insertar en arbol aleatorio " + inserciones + " elementos");
         aleatorioTiempoInicio = System.nanoTime();
+        int na = numeros.size();
         for(Integer i : insertar)
-            insertarNodoIterativo(raiz2, i);
+        {
+            insert(random, i, raiz2, na);
+            na++;
+        }
         aleatorioTiempoFinal = System.nanoTime();
         
         System.out.println("Tiempo para insertar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
@@ -124,16 +128,7 @@ public class Abb {
             buscarNodoRecursivo(raiz2, i);
         aleatorioTiempoFinal = System.nanoTime();
 
-        System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
-
-        Nodo raiz3 = null;
-        raiz3 = insert(random, 5, raiz3);
-        raiz3 = insert(random, 7, raiz3);
-        raiz3 = insert(random, 9, raiz3);
-        raiz3 = insert(random, 10, raiz3);
-        raiz3 = insert(random, 15, raiz3);
-        imprimirPreOrden(raiz3);
-        
+        System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");        
     }
     
 /**
@@ -340,21 +335,20 @@ public class Abb {
         Nodo aux = raiz;
         int n = numeros.size();
         int N = 0;
-        int M;         
+        int M;
         int valor;
         for(int i=0; i<n; i++){
             M = numeros.size()-1;
             valor = (int) Math.floor(random.nextFloat()*(N-M+1)+M); // indice del arrayList a eliminar 
-            aux = insertarNodoIterativo(aux, numeros.get(valor)); // agrego el valor elegido al azar
+            aux = insert(random, numeros.get(valor), raiz,i); // agrego el valor elegido al azar
             numeros.remove(valor); // elimino el valor elegido al azar para no volver a elegirlo
         }
         return aux;
     }
     
-    public static Nodo insert(Random random, int valor, Nodo T){
-        int n, r;
-        n = 5;
-        r = random.nextInt(5);
+    public static Nodo insert(Random random, int valor, Nodo T, int n){
+        int r;
+        r = random.nextInt(n+1);
         if(T == null){
             return new Nodo(valor, null, null);
         }
@@ -362,10 +356,10 @@ public class Abb {
             return insertAtRoot(valor, T);
         }
         if(valor < T.getValor()){
-            T.setIzq(insert(random, valor,T.getIzq()));
+            T.setIzq(insert(random, valor,T.getIzq(),n));
         }
         else{
-            T.setDer(insert(random, valor,T.getDer()));
+            T.setDer(insert(random, valor,T.getDer(),n));
         }
         return T;
         
@@ -398,7 +392,7 @@ public class Abb {
         }
         else{
             S = T;
-            split(valor, T.getDer(), S, G.getDer());
+            split(valor, T.getDer(), S.getDer(), G);
         }
         return;
     }
