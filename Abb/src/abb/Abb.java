@@ -124,8 +124,10 @@ public class Abb {
             buscarNodoRecursivo(raiz2, i);
         aleatorioTiempoFinal = System.nanoTime();
 
-        
         System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
+
+        Nodo raiz3 = null;
+        raiz3 = insert(random, 10000, raiz3);
         
     }
     
@@ -342,6 +344,52 @@ public class Abb {
             numeros.remove(valor); // elimino el valor elegido al azar para no volver a elegirlo
         }
         return aux;
+    }
+    
+    public static Nodo insert(Random random, int valor, Nodo T){
+        int n, r;
+        n = 10000;
+        r = random.nextInt(1000);
+        if(r == n){
+            return insertAtRoot(valor, T);
+        }
+        if(valor < T.getValor()){
+            T.getIzq().setIzq(insert(random, valor,T.getIzq()));
+        }
+        else{
+            T.getDer().setIzq(insert(random, valor,T.getDer()));
+        }
+        return T;
+        
+        
+        
+    }
+
+    public static Nodo insertAtRoot(int valor, Nodo T) {
+        Nodo S = null;
+        Nodo G = null;
+        
+        slipt(valor, T, S, G);
+        T.setValor(valor);
+        T.setIzq(S);
+        T.setDer(G);
+        return T;
+    }
+
+    public static void slipt(int valor, Nodo T, Nodo S, Nodo G) {
+        if(T == null){
+            S = G;
+            return;
+        }
+        if(valor < T.getValor()){
+            G = T;
+            slipt(valor, T.getIzq(), S, G.getIzq());
+        }
+        else{
+            S = T;
+            slipt(valor, T.getDer(), S, G.getDer());
+        }
+        return;
     }
     
 
