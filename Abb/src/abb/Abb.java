@@ -127,7 +127,7 @@ public class Abb {
         for(Integer i : buscar)
             buscarNodoRecursivo(raiz2, i);
         aleatorioTiempoFinal = System.nanoTime();
-
+        
         System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");        
     }
     
