@@ -47,10 +47,7 @@ public class Abb {
         {
             cant = Integer.parseInt(args[4]);
         }
-        
-
-        
-        
+                
         int creacionNormal = 0;
         int creacionAleatoria = 0;
         int insercionNormal = 0;
@@ -63,9 +60,9 @@ public class Abb {
         
         for(int j=0; j<cant; j++){
                 
-                
-           ArrayList<Integer> numeros = generarNumeros(n,random);
-           ArrayList<Integer> copiaNumeros = new ArrayList<>(numeros);
+            ArrayList<Integer> numeros = generarNumeros(n,random);
+            //ArrayList<Integer> numeros = generarNumerosSeguidos(1,n,random);
+            ArrayList<Integer> copiaNumeros = new ArrayList<>(numeros);
         
                 Nodo raiz1 = null;
                 Nodo raiz2 = null;
@@ -99,6 +96,7 @@ public class Abb {
 //                System.out.println("Tiempo para crear: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
 
                 ArrayList<Integer> insertar = generarNumeros(inserciones, random);
+                //ArrayList<Integer> insertar = generarNumerosSeguidos(numeros.size()+1, inserciones, random);
                 numeros.addAll(insertar);
 
                 //INSERCION ARBOL NORMAL
@@ -361,7 +359,16 @@ public class Abb {
             numeros.add(valor);
         }
         return numeros;
+    }
     
+    public static ArrayList<Integer> generarNumerosSeguidos(int d, int c, Random random)
+    {
+        ArrayList<Integer> n = new ArrayList<>();
+        for(int i = d ; i < c+d ; i++)
+        {
+            n.add(i);
+        }
+        return n;
     }
     
     
@@ -418,9 +425,6 @@ public class Abb {
             T.setDer(insert(random, valor,T.getDer(),n));
         }
         return T;
-        
-        
-        
     }
 
     public static Nodo insertAtRoot(int valor, Nodo T) {
@@ -434,8 +438,6 @@ public class Abb {
         return T;
     }
     
-    
-
     public static void split(int valor, Nodo T, Nodo S, Nodo G) {
         if(T == null){
             S = null;
