@@ -13,6 +13,7 @@ import java.util.Random;
  */
 public class Abb {
 
+    int altura;
     /**
      * @param args the command line arguments
      */
