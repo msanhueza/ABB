@@ -13,8 +13,7 @@ import java.util.Random;
  */
 public class Abb {
 
-    int altura;
-    /**
+   /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -56,12 +55,10 @@ public class Abb {
         int busquedaAleatoria = 0;
         int alturaNormal = 0;
         int alturaAleatoria = 0;
-        //System.out.println("Arreglo a insertar: " + numeros);
         
         for(int j=0; j<cant; j++){
                 
             ArrayList<Integer> numeros = generarNumeros(n,random);
-            //ArrayList<Integer> numeros = generarNumerosSeguidos(1,n,random);
             ArrayList<Integer> copiaNumeros = new ArrayList<>(numeros);
         
             Nodo raiz1 = null;
@@ -69,49 +66,34 @@ public class Abb {
 
 
     //      GENERACION NORMAL
-//                System.out.println("");
-//                System.out.println("Normal");
             long normalTiempoInicio = System.nanoTime();
             raiz1 = abbNormal(raiz1, copiaNumeros);
             long normalTiempoFinal = System.nanoTime();
-            //imprimirPreOrden(raiz1);
 
 
-            //System.out.println("");
             creacionNormal = (int) (creacionNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
-//                System.out.println("Tiempo para crear: " + (normalTiempoFinal - normalTiempoInicio)/1000 + " nanosegundos");
-
 
 
     //      GENERACION ALEATORIA   
-//                System.out.println("");
-//                System.out.println("Aleatorio");
             long aleatorioTiempoInicio = System.nanoTime();
             raiz2 = abbAleatorio(raiz2, copiaNumeros, random);
             long aleatorioTiempoFinal = System.nanoTime();
-            //imprimirPreOrden(raiz2);
 
-            //System.out.println("");
             creacionAleatoria = (int) (creacionAleatoria + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
-//                System.out.println("Tiempo para crear: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
+
 
             ArrayList<Integer> insertar = generarNumeros(inserciones, random);
-            //ArrayList<Integer> insertar = generarNumerosSeguidos(numeros.size()+1, inserciones, random);
             numeros.addAll(insertar);
 
             //INSERCION ARBOL NORMAL
-//                System.out.println("");
-//                System.out.println("Insertar en arbol normal " + inserciones + " elementos");
             normalTiempoInicio = System.nanoTime();
             for(Integer i : insertar)
                 insertarNodoIterativo(raiz1, i);
             normalTiempoFinal = System.nanoTime();
             insercionNormal = (int) (insercionNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
-//                System.out.println("Tiempo para insertar: " + (normalTiempoFinal - normalTiempoInicio)/1000 + " nanosegundos");
+
 
             //INSERCION ARBOL ALEATORIO
-//                System.out.println("");
-//                System.out.println("Insertar en arbol aleatorio " + inserciones + " elementos");
             aleatorioTiempoInicio = System.nanoTime();
             int na = numeros.size();
             for(Integer i : insertar)
@@ -121,7 +103,7 @@ public class Abb {
             }
             aleatorioTiempoFinal = System.nanoTime();
             insercionAleatorio = (int) (insercionAleatorio + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
-//                System.out.println("Tiempo para insertar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
+
 
             //Generar lista de numeros a buscar
             ArrayList<Integer> buscar = new ArrayList<>();
@@ -133,24 +115,18 @@ public class Abb {
             }
 
             //BUSQUEDA ARBOL NORMAL
-//                System.out.println("");
-//                System.out.println("Buscar en arbol normal " + busquedas + " elementos");
             normalTiempoInicio = System.nanoTime();
             for(Integer i : buscar)
                 buscarNodoRecursivo(raiz1, i);
             normalTiempoFinal = System.nanoTime();
             busquedaNormal = (int) (busquedaNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
-//                System.out.println("Tiempo para buscar: " + (normalTiempoFinal - normalTiempoInicio)/1000 + " nanosegundos");
 
             //BUSQUEDA ARBOL ALEATORIO
-//                System.out.println("");
-//                System.out.println("Buscar en arbol aleatorio " + busquedas + " elementos");
             aleatorioTiempoInicio = System.nanoTime();
             for(Integer i : buscar)
                 buscarNodoRecursivo(raiz2, i);
             aleatorioTiempoFinal = System.nanoTime();
             busquedaAleatoria = (int) (busquedaAleatoria + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
-//                System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
                 
             alturaNormal += altura(raiz1);
             alturaAleatoria += altura(raiz2);
@@ -410,6 +386,14 @@ public class Abb {
         return aux;
     }
     
+    /**
+     * El metodo se encarga de insertar un nodo en el arbol binario aleatorio
+     * @param random semilla de aleatoriedad
+     * @param valor que se ingresara en el arbol
+     * @param T referencia al arbol binario
+     * @param n cantidad de nodos en el arbol
+     * @return 
+     */
     public static Nodo insert(Random random, int valor, Nodo T, int n){
         int r;
         r = random.nextInt(n+1);
@@ -428,6 +412,12 @@ public class Abb {
         return T;
     }
 
+    /**
+     * El metodo se encarga de insertar un nodo en la raiz del arbol
+     * @param valor se refiere al valor a insertar en el arbol
+     * @param T se refiere a la referencia del arbol
+     * @return 
+     */
     public static Nodo insertAtRoot(int valor, Nodo T) {
         Nodo S = null;
         Nodo G = null;
@@ -439,6 +429,13 @@ public class Abb {
         return T;
     }
     
+    /**
+     * El metodo se encarga de reubicar un nodo en el arbol
+     * @param valor se refiere al valor a guardar en el arbol
+     * @param T referencia al arbol binario
+     * @param S nodo auxiliar
+     * @param G nodo auxiliar
+     */
     public static void split(int valor, Nodo T, Nodo S, Nodo G) {
         if(T == null){
             S = null;
@@ -456,6 +453,11 @@ public class Abb {
         return;
     }
     
+    /**
+     * El metodo se encarga de calcular la altura de un arbol binario
+     * @param T referencia al arbol
+     * @return la altura del arbol
+     */
     public static int altura(Nodo T)
     {
         if(T == null)
