@@ -64,92 +64,92 @@ public class Abb {
             //ArrayList<Integer> numeros = generarNumerosSeguidos(1,n,random);
             ArrayList<Integer> copiaNumeros = new ArrayList<>(numeros);
         
-                Nodo raiz1 = null;
-                Nodo raiz2 = null;
+            Nodo raiz1 = null;
+            Nodo raiz2 = null;
 
 
-        //      GENERACION NORMAL
+    //      GENERACION NORMAL
 //                System.out.println("");
 //                System.out.println("Normal");
-                long normalTiempoInicio = System.nanoTime();
-                raiz1 = abbNormal(raiz1, copiaNumeros);
-                long normalTiempoFinal = System.nanoTime();
-                //imprimirPreOrden(raiz1);
+            long normalTiempoInicio = System.nanoTime();
+            raiz1 = abbNormal(raiz1, copiaNumeros);
+            long normalTiempoFinal = System.nanoTime();
+            //imprimirPreOrden(raiz1);
 
 
-                //System.out.println("");
-                creacionNormal = (int) (creacionNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
+            //System.out.println("");
+            creacionNormal = (int) (creacionNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
 //                System.out.println("Tiempo para crear: " + (normalTiempoFinal - normalTiempoInicio)/1000 + " nanosegundos");
 
 
 
-        //      GENERACION ALEATORIA   
+    //      GENERACION ALEATORIA   
 //                System.out.println("");
 //                System.out.println("Aleatorio");
-                long aleatorioTiempoInicio = System.nanoTime();
-                raiz2 = abbAleatorio(raiz2, copiaNumeros, random);
-                long aleatorioTiempoFinal = System.nanoTime();
-                //imprimirPreOrden(raiz2);
+            long aleatorioTiempoInicio = System.nanoTime();
+            raiz2 = abbAleatorio(raiz2, copiaNumeros, random);
+            long aleatorioTiempoFinal = System.nanoTime();
+            //imprimirPreOrden(raiz2);
 
-                //System.out.println("");
-                creacionAleatoria = (int) (creacionAleatoria + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
+            //System.out.println("");
+            creacionAleatoria = (int) (creacionAleatoria + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
 //                System.out.println("Tiempo para crear: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
 
-                ArrayList<Integer> insertar = generarNumeros(inserciones, random);
-                //ArrayList<Integer> insertar = generarNumerosSeguidos(numeros.size()+1, inserciones, random);
-                numeros.addAll(insertar);
+            ArrayList<Integer> insertar = generarNumeros(inserciones, random);
+            //ArrayList<Integer> insertar = generarNumerosSeguidos(numeros.size()+1, inserciones, random);
+            numeros.addAll(insertar);
 
-                //INSERCION ARBOL NORMAL
+            //INSERCION ARBOL NORMAL
 //                System.out.println("");
 //                System.out.println("Insertar en arbol normal " + inserciones + " elementos");
-                normalTiempoInicio = System.nanoTime();
-                for(Integer i : insertar)
-                    insertarNodoIterativo(raiz1, i);
-                normalTiempoFinal = System.nanoTime();
-                insercionNormal = (int) (insercionNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
+            normalTiempoInicio = System.nanoTime();
+            for(Integer i : insertar)
+                insertarNodoIterativo(raiz1, i);
+            normalTiempoFinal = System.nanoTime();
+            insercionNormal = (int) (insercionNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
 //                System.out.println("Tiempo para insertar: " + (normalTiempoFinal - normalTiempoInicio)/1000 + " nanosegundos");
 
-                //INSERCION ARBOL ALEATORIO
+            //INSERCION ARBOL ALEATORIO
 //                System.out.println("");
 //                System.out.println("Insertar en arbol aleatorio " + inserciones + " elementos");
-                aleatorioTiempoInicio = System.nanoTime();
-                int na = numeros.size();
-                for(Integer i : insertar)
-                {
-                    insert(random, i, raiz2, na);
-                    na++;
-                }
-                aleatorioTiempoFinal = System.nanoTime();
-                insercionAleatorio = (int) (insercionAleatorio + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
+            aleatorioTiempoInicio = System.nanoTime();
+            int na = numeros.size();
+            for(Integer i : insertar)
+            {
+                insert(random, i, raiz2, na);
+                na++;
+            }
+            aleatorioTiempoFinal = System.nanoTime();
+            insercionAleatorio = (int) (insercionAleatorio + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
 //                System.out.println("Tiempo para insertar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
 
-                //Generar lista de numeros a buscar
-                ArrayList<Integer> buscar = new ArrayList<>();
-                for(int b = 0 ; b < busquedas ; b++)
-                {
-                    int ni = random.nextInt(numeros.size());
-                    buscar.add(numeros.get(ni));
-                    numeros.remove(ni);
-                }
+            //Generar lista de numeros a buscar
+            ArrayList<Integer> buscar = new ArrayList<>();
+            for(int b = 0 ; b < busquedas ; b++)
+            {
+                int ni = random.nextInt(numeros.size());
+                buscar.add(numeros.get(ni));
+                numeros.remove(ni);
+            }
 
-                //BUSQUEDA ARBOL NORMAL
+            //BUSQUEDA ARBOL NORMAL
 //                System.out.println("");
 //                System.out.println("Buscar en arbol normal " + busquedas + " elementos");
-                normalTiempoInicio = System.nanoTime();
-                for(Integer i : buscar)
-                    buscarNodoRecursivo(raiz1, i);
-                normalTiempoFinal = System.nanoTime();
-                busquedaNormal = (int) (busquedaNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
+            normalTiempoInicio = System.nanoTime();
+            for(Integer i : buscar)
+                buscarNodoRecursivo(raiz1, i);
+            normalTiempoFinal = System.nanoTime();
+            busquedaNormal = (int) (busquedaNormal + (normalTiempoFinal - normalTiempoInicio)/1000);
 //                System.out.println("Tiempo para buscar: " + (normalTiempoFinal - normalTiempoInicio)/1000 + " nanosegundos");
 
-                //BUSQUEDA ARBOL ALEATORIO
+            //BUSQUEDA ARBOL ALEATORIO
 //                System.out.println("");
 //                System.out.println("Buscar en arbol aleatorio " + busquedas + " elementos");
-                aleatorioTiempoInicio = System.nanoTime();
-                for(Integer i : buscar)
-                    buscarNodoRecursivo(raiz2, i);
-                aleatorioTiempoFinal = System.nanoTime();
-                busquedaAleatoria = (int) (busquedaAleatoria + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
+            aleatorioTiempoInicio = System.nanoTime();
+            for(Integer i : buscar)
+                buscarNodoRecursivo(raiz2, i);
+            aleatorioTiempoFinal = System.nanoTime();
+            busquedaAleatoria = (int) (busquedaAleatoria + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000);
 //                System.out.println("Tiempo para buscar: " + (aleatorioTiempoFinal - aleatorioTiempoInicio)/1000 + " nanosegundos");
                 
             alturaNormal += altura(raiz1);
@@ -361,6 +361,7 @@ public class Abb {
         return numeros;
     }
     
+    //metodo para generar numeros de manera seguida para el peor caso
     public static ArrayList<Integer> generarNumerosSeguidos(int d, int c, Random random)
     {
         ArrayList<Integer> n = new ArrayList<>();
